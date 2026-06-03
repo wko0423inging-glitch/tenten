@@ -32,6 +32,9 @@ workflows:
       app_store_connect: Codemagic-TenTen
 
     environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.tenten.ios
       vars:
         BUNDLE_ID: com.tenten.ios
         XCODE_WORKSPACE: ios/Runner.xcworkspace
@@ -44,24 +47,10 @@ workflows:
       - name: Flutter pub get
         script: flutter pub get
 
-      - name: Set up code signing
-        script: |
-          set -ex
-          keychain initialize
-          app-store-connect fetch-signing-files "$BUNDLE_ID" \
-            --type IOS_APP_STORE \
-            --create
-          keychain add-certificates
-          xcode-project use-profiles --custom-export-options '{"method": "app-store"}'
-          cat /Users/builder/export_options.plist
-
       - name: Build iOS IPA
         script: |
-          flutter build ios --release --no-codesign
-          xcode-project build-ipa \
-            --workspace "$XCODE_WORKSPACE" \
-            --scheme "$XCODE_SCHEME" \
-            --export-options-plist /Users/builder/export_options.plist
+          flutter build ipa --release \
+            --export-options-plist=/Users/builder/export_options.plist
 
     artifacts:
       - build/ios/ipa/*.ipa
