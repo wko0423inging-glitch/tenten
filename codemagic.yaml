@@ -48,9 +48,7 @@ workflows:
         script: flutter pub get
 
       - name: Build iOS IPA
-        script: |
-          flutter build ipa --release \
-            --export-options-plist=/Users/builder/export_options.plist
+        script: flutter build ipa --release
 
     artifacts:
       - build/ios/ipa/*.ipa
