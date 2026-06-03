@@ -54,10 +54,30 @@ workflows:
           xcode-project use-profiles
 
       - name: Build iOS IPA
-        script: flutter build ipa --release
+        script: |
+          cat > /tmp/ExportOptions.plist << EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key>
+            <string>app-store</string>
+            <key>teamID</key>
+            <string>ZVJ5H9S337</string>
+            <key>provisioningProfiles</key>
+            <dict>
+              <key>com.tenten.ios</key>
+              <string>tenten_app_store</string>
+            </dict>
+          </dict>
+          </plist>
+          EOF
+          flutter build ipa --release \
+            --export-options-plist=/tmp/ExportOptions.plist
 
     artifacts:
       - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
 
     publishing:
       app_store_connect:
