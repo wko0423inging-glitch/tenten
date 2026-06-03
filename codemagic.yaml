@@ -6,7 +6,7 @@ workflows:
       groups:
         - google_play
       vars:
-        BUNDLE_ID: com.tenten.app
+        BUNDLE_ID: com.tenten.ios
       flutter: stable
 
     scripts:
