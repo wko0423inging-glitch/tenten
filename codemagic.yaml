@@ -1,0 +1,92 @@
+workflows:
+  android-release:
+    name: Android Release (Google Play)
+    max_build_duration: 60
+    environment:
+      groups:
+        - google_play
+      vars:
+        BUNDLE_ID: com.tenten.app
+      flutter: stable
+
+    scripts:
+      - name: Flutter pub get
+        script: flutter pub get
+
+      - name: Build Android APK
+        script: flutter build apk --release
+
+      - name: Build Android App Bundle
+        script: flutter build appbundle --release
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/release/app-release.aab
+
+  ios-release:
+    name: iOS Release (App Store)
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+
+    environment:
+      groups:
+        - app_store_connect
+      vars:
+        BUNDLE_ID: com.tenten.app
+        XCODE_WORKSPACE: ios/Runner.xcworkspace
+        XCODE_SCHEME: Runner
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+
+    scripts:
+      - name: Flutter pub get
+        script: flutter pub get
+
+      - name: Build iOS IPA
+        script: flutter build ipa --release
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+
+  macos-release:
+    name: macOS Release
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+
+    environment:
+      groups:
+        - app_store_connect
+      vars:
+        BUNDLE_ID: com.tenten.app
+      flutter: stable
+      xcode: latest
+
+    scripts:
+      - name: Flutter pub get
+        script: flutter pub get
+
+      - name: Build macOS
+        script: flutter build macos --release
+
+    artifacts:
+      - build/macos/Build/Products/Release/*.dmg
+
+  windows-release:
+    name: Windows Release
+    max_build_duration: 60
+
+    environment:
+      vars:
+        BUNDLE_ID: com.tenten.app
+      flutter: stable
+
+    scripts:
+      - name: Flutter pub get
+        script: flutter pub get
+
+      - name: Build Windows
+        script: flutter build windows --release
+
+    artifacts:
+      - build/windows/runner/Release/*.exe
