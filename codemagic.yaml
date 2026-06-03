@@ -47,6 +47,12 @@ workflows:
       - name: Flutter pub get
         script: flutter pub get
 
+      - name: Set up code signing
+        script: |
+          keychain initialize
+          keychain add-certificates
+          xcode-project use-profiles
+
       - name: Build iOS IPA
         script: flutter build ipa --release
 
