@@ -30,7 +30,7 @@ workflows:
 
     environment:
       vars:
-        BUNDLE_ID: com.tenten.app
+        BUNDLE_ID: com.tenten.ios
         XCODE_WORKSPACE: ios/Runner.xcworkspace
         XCODE_SCHEME: Runner
       flutter: stable
