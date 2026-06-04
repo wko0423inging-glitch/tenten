@@ -3,8 +3,8 @@ workflows:
     name: Android Release (Google Play)
     max_build_duration: 60
     environment:
-      groups:
-        - google_play
+      android_signing:
+        - tenten_android
       vars:
         BUNDLE_ID: com.tenten.ios
       flutter: stable
@@ -13,14 +13,10 @@ workflows:
       - name: Flutter pub get
         script: flutter pub get
 
-      - name: Build Android APK
-        script: flutter build apk --release
-
       - name: Build Android App Bundle
         script: flutter build appbundle --release
 
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
       - build/app/outputs/bundle/release/app-release.aab
 
   ios-release:
