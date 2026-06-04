@@ -32,6 +32,8 @@
 	<string>ファイルを共有するためにカメラへのアクセスが必要です。</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>近くのデバイスを検出するために位置情報へのアクセスが必要です。</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>近くのデバイスを検出するために位置情報へのアクセスが必要です。</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
