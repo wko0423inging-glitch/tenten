@@ -12,11 +12,11 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-  bonsoir: ^5.1.2
+  bonsoir: ^7.1.1
   file_picker: ^8.0.0
   path_provider: ^2.1.0
   permission_handler: ^11.0.0
-  receive_sharing_intent: ^1.8.0
+  receive_sharing_intent: ^1.8.1
 
 dev_dependencies:
   flutter_test:
